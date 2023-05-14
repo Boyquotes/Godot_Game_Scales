@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://dxungrp5eimbx"]
+
+[ext_resource type="Texture2D" uid="uid://cr2mwfg352yfs" path="res://Sprites/Sacels/ScaleBackground.png" id="1_ao7u3"]
+[ext_resource type="Script" path="res://Scripts/Scales.cs" id="2_vke4w"]
+[ext_resource type="Texture2D" uid="uid://b5enmwo2osoa" path="res://Sprites/Sacels/Cup_Light.png" id="3_20yup"]
+[ext_resource type="Texture2D" uid="uid://d4hj0v3agpgf6" path="res://Sprites/Sacels/Cup_Night.png" id="4_uetp8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pr6hh"]
+radius = 16.6667
+height = 130.0
+
+[node name="Scales" type="Sprite2D" node_paths=PackedStringArray("_cupLight", "_cupNight")]
+position = Vector2(0, -38)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_ao7u3")
+script = ExtResource("2_vke4w")
+_cupLight = NodePath("Cup Light")
+_cupNight = NodePath("Cup Night")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_pr6hh")
+
+[node name="Cup Light" type="Sprite2D" parent="."]
+position = Vector2(-33.3333, 0)
+texture = ExtResource("3_20yup")
+
+[node name="Cup Night" type="Sprite2D" parent="."]
+position = Vector2(33.3333, 0)
+texture = ExtResource("4_uetp8")
+
+[connection signal="area_entered" from="Area2D" to="." method="OnTriggerEnter"]

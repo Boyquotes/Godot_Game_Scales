@@ -1,0 +1,36 @@
+[gd_scene load_steps=13 format=3 uid="uid://0ohettbcs1tf"]
+
+[ext_resource type="Texture2D" uid="uid://d3qdunwc2lp2h" path="res://Sprites/Characters/LightBot/Character_Light_01.png" id="1_xvl1a"]
+[ext_resource type="Script" path="res://Scripts/CharacterBot.cs" id="2_ptj2s"]
+[ext_resource type="Texture2D" uid="uid://ccw33ne4sj58g" path="res://Sprites/Characters/LightBot/Character_Light_02.png" id="3_sjvxv"]
+[ext_resource type="Texture2D" uid="uid://8i1vuq2sc8gl" path="res://Sprites/Characters/LightBot/Character_Light_03.png" id="4_pfk57"]
+[ext_resource type="Texture2D" uid="uid://b56gb61br3jib" path="res://Sprites/Characters/NightBot/Character_01.png" id="5_461gt"]
+[ext_resource type="Texture2D" uid="uid://chaatxea83jor" path="res://Sprites/Characters/LightBot/Character_Light_04.png" id="5_sdxdq"]
+[ext_resource type="Texture2D" uid="uid://cogmmtceqc58m" path="res://Sprites/Characters/LightBot/Character_Light_05.png" id="6_a58il"]
+[ext_resource type="Texture2D" uid="uid://chbwhexrokyrm" path="res://Sprites/Characters/NightBot/Character_02.png" id="6_feupu"]
+[ext_resource type="Texture2D" uid="uid://md05yfqtucj4" path="res://Sprites/Characters/NightBot/Character_03.png" id="7_tr2n4"]
+[ext_resource type="Texture2D" uid="uid://dyihhdpgskdc7" path="res://Sprites/Characters/NightBot/Character_04.png" id="10_rornn"]
+[ext_resource type="Texture2D" uid="uid://ceebwximyyrfx" path="res://Sprites/Characters/NightBot/Character_05.png" id="11_6btci"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a3jlc"]
+radius = 6.08276
+
+[node name="Bot" type="Sprite2D"]
+visibility_layer = 3
+use_parent_material = true
+texture = ExtResource("1_xvl1a")
+script = ExtResource("2_ptj2s")
+_skinsLight = Array[Texture2D]([ExtResource("1_xvl1a"), ExtResource("3_sjvxv"), ExtResource("4_pfk57"), ExtResource("5_sdxdq"), ExtResource("6_a58il")])
+_skinsNight = Array[Texture2D]([ExtResource("5_461gt"), ExtResource("6_feupu"), ExtResource("7_tr2n4"), ExtResource("10_rornn"), ExtResource("11_6btci")])
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, 10)
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_a3jlc")
+debug_color = Color(0, 0.6, 0.701961, 0.0784314)
+
+[connection signal="area_entered" from="Area2D" to="." method="OnTriggerEnter"]
+[connection signal="area_exited" from="Area2D" to="." method="OnTriggerExit"]
